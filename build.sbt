@@ -1,22 +1,19 @@
-import uk.gov.hmrc.DefaultBuildSettings
+val scalafixSettings = Seq(
+  semanticdbEnabled := true, // enable SemanticDB
+  semanticdbVersion := scalafixSemanticdb.revision // "4.4.0"
+)
 
-ThisBuild / majorVersion := 0
-ThisBuild / scalaVersion := "3.3.6"
-ThisBuild / scalacOptions += "-Wconf:msg=Flag.*repeatedly:s"
-
-lazy val microservice = Project("sdec-threadinfo-api-alpha-test", file("."))
-  .enablePlugins(play.sbt.PlayScala, SbtDistributablesPlugin)
-  .disablePlugins(JUnitXmlReportPlugin) //Required to prevent https://github.com/scalatest/scalatest/issues/1427
+lazy val root = (project in file("."))
   .settings(
-    libraryDependencies ++= AppDependencies.compile ++ AppDependencies.test,
-    // https://www.scala-lang.org/2021/01/12/configuring-and-suppressing-warnings.html
-    // suppress warnings in generated routes files
-    scalacOptions += "-Wconf:src=routes/.*:s",
+    name := "sdec-threadinfo-api-test",
+    version := "0.1.0",
+    scalaVersion := "3.3.7",
+    scalacOptions ++= Seq("-feature"),
+    libraryDependencies ++= Dependencies.test,
+    resolvers += MavenRepository("HMRC-open-artefacts-maven2", "https://open.artefacts.tax.service.gov.uk/maven2"),
+    scalafixSettings,
+    (Compile / compile) := ((Compile / compile) dependsOn (Compile / scalafmtSbtCheck, Compile / scalafmtCheckAll)).value
   )
-  .settings(CodeCoverageSettings.settings: _*)
 
-lazy val it = project
-  .enablePlugins(PlayScala)
-  .dependsOn(microservice % "test->test")
-  .settings(DefaultBuildSettings.itSettings())
-  .settings(libraryDependencies ++= AppDependencies.it)
+addCommandAlias("prePrChecks", ";scalafmtCheckAll;scalafmtSbtCheck;scalafixAll --check")
+addCommandAlias("lint", ";scalafmtAll;scalafmtSbt;scalafixAll")
