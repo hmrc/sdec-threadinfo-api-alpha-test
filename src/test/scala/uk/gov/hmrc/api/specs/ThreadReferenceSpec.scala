@@ -33,10 +33,7 @@ class ThreadReferenceSpec extends AnyFeatureSpec with Matchers with GivenWhenThe
 
       Then("The user should be able to see the expected response")
 
-
-
     }
-
 
   }
 }
