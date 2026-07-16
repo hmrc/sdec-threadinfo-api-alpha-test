@@ -2,4 +2,4 @@
 
 ENVIRONMENT=$1
 
-sbt scalafmtAll scalafmtCheckAll scalafmtSbtCheck clean compile -Denvironment="${ENVIRONMENT:=local}" "testOnly uk.gov.hmrc.api.specs.*"
+sbt scalafmtAll scalafmtCheckAll scalafmtSbtCheck clean compile -Denvironment="${ENVIRONMENT:=local}"
