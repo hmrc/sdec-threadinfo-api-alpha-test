@@ -15,6 +15,9 @@
  */
 
 package uk.gov.hmrc.api.Specdef
+
+import org.scalatest.matchers.must.Matchers.include
+import org.scalatest.matchers.should.Matchers.{convertToStringShouldWrapperForVerb, shouldBe}
 import uk.gov.hmrc.api.client.TestClient
 
 import java.net.URI
@@ -23,7 +26,7 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.format.DateTimeFormatter
-import java.time.{LocalDate, LocalDateTime}
+import java.time.{LocalDate, LocalDateTime, format}
 
 trait ThreadRefSteps {
 

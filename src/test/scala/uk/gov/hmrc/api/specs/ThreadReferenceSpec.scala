@@ -17,8 +17,23 @@
 package uk.gov.hmrc.api.specs
 
 import org.scalatest.GivenWhenThen
+import uk.gov.hmrc.api.Specdef.ThreadRefSteps
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
-import uk.gov.hmrc.api.Specdef.ThreadRefSteps
 
-class ThreadReferenceSpec extends AnyFeatureSpec with Matchers with GivenWhenThen with ThreadRefSteps {}
+class ThreadReferenceSpec extends AnyFeatureSpec with Matchers with GivenWhenThen with ThreadRefSteps {
+
+  Feature("Thread Reference number Validation") {
+
+    Scenario("Valid Thread Reference number returns 200 response") {
+
+      Given("The user makes a GET api call to the correct endpoint ")
+
+      When("The user queries a 12 digit Thread Reference number")
+
+      Then("The user should be able to see the expected response")
+
+    }
+
+  }
+}
