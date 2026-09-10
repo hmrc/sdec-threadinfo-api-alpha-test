@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.api.Specdef
 
-import org.scalatest.matchers.must.Matchers.include
-import org.scalatest.matchers.should.Matchers.{convertToStringShouldWrapperForVerb, shouldBe}
 import uk.gov.hmrc.api.client.TestClient
 
 import java.net.URI
@@ -26,7 +24,7 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.format.DateTimeFormatter
-import java.time.{LocalDate, LocalDateTime, format}
+import java.time.{LocalDate, LocalDateTime}
 
 trait ThreadRefSteps {
 
@@ -39,11 +37,11 @@ trait ThreadRefSteps {
     json.replaceAll("\\s+", "").trim
 
   protected def normalizeResponseJson(response: String): String = {
-    val trimmed   = response.trim
-    val unquoted  = if (trimmed.startsWith("\"") && trimmed.endsWith("\"")) {
+    val trimmed  = response.trim
+    val unquoted = if trimmed.startsWith("\"") && trimmed.endsWith("\"") then {
       trimmed.substring(1, trimmed.length - 1)
     } else trimmed
-    val unwrapped = if (unquoted.startsWith("[") && unquoted.endsWith("]")) {
+    val unwrapped = if unquoted.startsWith("[") && unquoted.endsWith("]") then {
       unquoted.substring(1, unquoted.length - 1)
     } else unquoted
     normalizeJsonString(unwrapped)
