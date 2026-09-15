@@ -17,9 +17,9 @@
 package uk.gov.hmrc.api.specs
 
 import org.scalatest.GivenWhenThen
-import uk.gov.hmrc.api.Specdef.ThreadRefSteps
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
+import uk.gov.hmrc.api.Specdef.ThreadRefSteps
 
 class ThreadReferenceSpec extends AnyFeatureSpec with Matchers with GivenWhenThen with ThreadRefSteps {
 
