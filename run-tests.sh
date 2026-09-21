@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
-ENVIRONMENT=$1
+BROWSER=$1
+ENVIRONMENT=$2
+HEADLESSFLAG=$3
+PREVIOUSVERSIONFLAG=$4
 
-sbt scalafmtAll scalafmtCheckAll scalafmtSbtCheck clean compile -Denvironment="${ENVIRONMENT:=local}" "testOnly uk.gov.hmrc.api.specs.*"
+sbt scalafmtAll scalafmtCheckAll scalafmtSbtCheck clean -Dbrowser="${BROWSER:=chrome}" -Denvironment="${ENVIRONMENT:=local}" -Dbrowser.option.headless="${HEADLESSFLAG:=false}" -Dbrowser.usePreviousVersion="${PREVIOUSVERSIONFLAG:=true}" "testOnly uk.gov.hmrc.api.specs.*" testReport
+
+sbt scalafmtAll scalafmtCheckAll scalafmtSbtCheck clean -Denvironment="${ENVIRONMENT:=local}" "testOnly uk.gov.hmrc.api.specs.*"
